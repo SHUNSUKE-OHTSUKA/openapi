@@ -1,0 +1,55 @@
+openapi: 3.1.0
+info:
+  title: サンプル API
+  version: 0.0.1
+servers:
+- url: /
+paths:
+  /users:
+    get:
+      operationId: GetUser
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
+          description: デフォルトのエラーレスポンス
+    post:
+      operationId: PostUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        "200":
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
+          description: デフォルトのエラーレスポンス
+components:
+  schemas:
+    User:
+      example:
+        name: ""
+        id: ""
+      properties:
+        id:
+          format: int32
+        name: {}
+      required:
+      - id
+      - name
+    DefaultErrorResponse:
+      properties:
+        message: {}
